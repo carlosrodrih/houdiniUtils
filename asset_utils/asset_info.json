@@ -1,0 +1,16 @@
+{
+	"asset1": {
+		"id": "01",
+		"name": "obj1",
+		"link": "https://drive.google.com/file/d/1wVmx6xjcNVUIiAtLyAWnzIVWMJ6aJYqZ/view?usp=drive_link",
+		"author": "carlos",
+		"company": "rebelway"
+	},
+	"asset2": {
+		"id": "02",
+		"name": "obj2",
+		"link": "https://drive.google.com/file/d/1D73FxBnG3WR9Qj8HHfUL4PA8meygOqAJ/view?usp=drive_link",
+		"author": "ian",
+		"company": "rebelway"
+	}
+}
