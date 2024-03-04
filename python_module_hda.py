@@ -3,12 +3,10 @@ import sys
 import os
 from importlib import reload 
 
-#PATH of the cloned git !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
-#Also don't forget to include your credentials.json in the same path!
-#HARDCODE CREDENTIALS PATH
-path = "C:/Users/carlo/Desktop/gdrive"
+#PATH of the cloned git !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+#path = "C:/Users/carlo/Desktop/gdrive"
 
-sys.path.append("C:/Users/carlo/Desktop/gdrive")
+sys.path.append("C:/Users/carlo/Desktop/python4production/WEEK3/repos/houdiniUtils")
 import gdrive
 reload(gdrive)
 
@@ -42,4 +40,4 @@ def setPath():
 def uploadDrive():
     file_path = hou.pwd().parm("filename").evalAsString()
     gd = gdrive.gdrive()
-    gd.execute(path,file_path)
+    gd.execute(file_path)

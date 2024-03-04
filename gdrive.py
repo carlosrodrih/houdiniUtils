@@ -8,7 +8,7 @@ from googleapiclient.discovery import build
 from googleapiclient.errors import HttpError
 from googleapiclient.http import MediaFileUpload
 
-
+#Hardcode test paths
 #drive_folder = "BackupFolder2"
 #backup_folder = "backupfiles"
 #token_path = "token.json"
@@ -18,8 +18,13 @@ class gdrive:
 	def __init__(self):
 		self.creds = None
 
-	def getAuthToken(self,path):
+	#This method is in charged of the authentication system of google drive api.
+	#!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+	#!!Also don't forget to include your credentials.json FOLDER path!!
+	#!!!!!!!!!!!!!!!!HARDCODE CREDENTIALS PATH!!!!!!!!!!!!!!!!!!!!!!!!!
+	def getAuthToken(self):
 		SCOPES = ["https://www.googleapis.com/auth/drive"]
+		path = "C:/Users/carlo/Desktop/gdrive" #CREDENTIALS FOLDER PATH! 
 		cred_path = path + "/credentials.json"
 		token_path = path + "/token.json"
 		if os.path.exists(token_path):
@@ -35,6 +40,7 @@ class gdrive:
 			with open(token_path,"w") as token:
 				token.write(self.creds.to_json())
 
+	#Checks if the folder exists in Google Drive. If not it creates it and returns the folder id.
 	def checkFolder(self, drive_folder):
 		try:
 			self.service = build("drive","v3",credentials=self.creds)
@@ -57,7 +63,8 @@ class gdrive:
 		except HttpError as e:
 			print("Error: "+str(e))
 
-	def uploadFiles(self, folder_id, file_path):
+	#Method to upload the selected file into the folder previously returned		
+	def uploadFile(self, folder_id, file_path):
 		try:
 			file_name = file_path.split("/")[-1]
 			file_metadata = {
@@ -72,11 +79,13 @@ class gdrive:
 		except HttpError as e:
 			print("Error: "+str(e))
 
-	def execute(self, path, file_path, drive_folder="HoudiniBackup"):
-		self.getAuthToken(path)
+	#Executes all the methods in order
+	def execute(self, file_path, drive_folder="HoudiniBackup"):
+		self.getAuthToken()
 		folder_id = self.checkFolder(drive_folder)
-		self.uploadFiles(folder_id,file_path)
+		self.uploadFile(folder_id,file_path)
 
+	#Method to test from houdini nvm
 	def test(self,path):
 		print("Test")
 		print(path,file)
