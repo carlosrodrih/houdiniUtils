@@ -8,5 +8,18 @@ The folder structure supported is: PROJECT -> SEQUENCES -> SHOTS -> SPECIFIC FOL
 3. Add shot folder inside the selected sequence folder
 4. Add as many folders as the project need.
 
-Or load an already created project with the compatible folder structure.
-
+Or load an already created project with the compatible folder structure
+For example:
+```bash
+test_project
+          ├───SEQ010
+          │   ├───SHOT100
+          │   ├───SHOT110
+          │   └───SHOT120
+          ├───SEQ020
+          │   ├───SHOT290
+          │   ├───SHOT320
+          │   └───SHOT330
+          └───SEQ030
+              └───SHOT555
+```
