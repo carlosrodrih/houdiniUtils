@@ -1,7 +1,7 @@
 # Week 4 Assignment
 Project Folder Generator V0.1
 
-The folder structure read is: PROJECT -> SEQUENCES -> SHOTS -> SPECIFIC FOLDERS
+The folder structure supported is: PROJECT -> SEQUENCES -> SHOTS -> SPECIFIC FOLDERS
 
 1. Set project (project folder).
 2. Add sequence folder
