@@ -121,4 +121,4 @@ while True:
 			with col2:
 				st.image(webcams[i+1],use_column_width=True)
 	#Wait for update It should be 5 minutes as the webcams updates.
-	time.sleep(10)
+	time.sleep(100)
