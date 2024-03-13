@@ -5,5 +5,5 @@ The objective of this app is to access different information from the Spanish Va
 This application is created for academic purposes.
 
 ### Attribution:
-- Icons and data from [infonieve.es](https://www.infonieve.es/estacion-esqui/valdezcaray/)
+- Icons and data from [meteoexploration](https://meteoexploration.com/en/forecasts/Valdezcaray/)
 - Webcam images and data from [Valdezcaray](https://www.valdezcaray.es/).
