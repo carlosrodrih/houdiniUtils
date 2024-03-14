@@ -7,7 +7,12 @@ import time
 #Update actual weather (each 10 minutes)
 @st.cache_data(ttl=600)
 def updateSnowReport():
-	response = requests.get("https://www.valdezcaray.es/parte-de-nieve/")
+	try:
+		response = requests.get("https://www.valdezcaray.es/parte-de-nieve/")
+	except requests.exceptions.ConnectionError:
+		print("Connection refused")
+		return None
+
 	soup = BeautifulSoup(response.content, "html.parser")
 	tiempo = soup.find('div', class_='tiempo')
 	actual = tiempo.text.strip()
@@ -23,9 +28,14 @@ def updateSnowReport():
 #Update forecast (each 1 hour)
 @st.cache_data(ttl=3600)
 def updateForecast():
-	response = requests.get("https://www.meteoexploration.com/en/forecasts/Valdezcaray/")
-	soup = BeautifulSoup(response.content, 'html.parser')
 	forecast = []
+	try:
+		response = requests.get("https://www.meteoexploration.com/en/forecasts/Valdezcaray/")
+	except requests.exceptions.ConnectionError:
+		print("Connection refused")
+		return forecast
+
+	soup = BeautifulSoup(response.content, 'html.parser')
 
 	dates = soup.find_all(class_='date')
 	temps_min = soup.find_all(class_='Tmin')
@@ -74,38 +84,42 @@ while True:
 	#Show Snow Report
 	with actual_placeholder.container():
 		st.header("Snow Report")
-		col1,col2,col3 = st.columns(3)
-		with col1:
-			st.write("Current Weather")
-			st.image(snow_report[1], width = 50,  output_format = "JPG")
-			st.write(f":orange[{snow_report[0].split()[1]}]")
-		with col2:
-			st.write("Slopes")
-			st.image(snow_report[3], width = 50, output_format = "JPG")
-			st.write(f":orange[{snow_report[2].split()[1]}]")
-		with col3:
-			st.write("Lifts")
-			st.image(snow_report[5], width = 50, output_format = "JPG")
-			st.write(f":orange[{snow_report[4].split()[1]}]")
-
+		if snow_report is not None:
+			col1,col2,col3 = st.columns(3)
+			with col1:
+				st.write("Current Weather")
+				st.image(snow_report[1], width = 50,  output_format = "JPG")
+				st.write(f":orange[{snow_report[0].split()[1]}]")
+			with col2:
+				st.write("Slopes")
+				st.image(snow_report[3], width = 50, output_format = "JPG")
+				st.write(f":orange[{snow_report[2].split()[1]}]")
+			with col3:
+				st.write("Lifts")
+				st.image(snow_report[5], width = 50, output_format = "JPG")
+				st.write(f":orange[{snow_report[4].split()[1]}]")
+		else:
+			st.write("Connection refused.")
 	#Show snow forecast
 	with forecast_placeholder.container():
 		st.header("Snow forecast")
-		columns = st.columns(7)
-		with columns[0]:
-			st.write("Day:")
-			st.write("Min:")
-			st.write("Max:")
-			st.write("Snow:")
-			st.write("")
-		for i in range(1,7):
-			with columns[i]:
-				st.write(forecast[i]["date"])
-				st.write(forecast[i]["tmin"])
-				st.write(forecast[i]["tmax"])
-				st.write(forecast[i]["snow"])
-				st.image(forecast[i]["icon"])
-
+		if len(forecast) >cm 7:
+			columns = st.columns(7)
+			with columns[0]:
+				st.write("Day:")
+				st.write("Min:")
+				st.write("Max:")
+				st.write("Snow:")
+				st.write("")
+			for i in range(1,7):
+				with columns[i]:
+					st.write(forecast[i]["date"])
+					st.write(forecast[i]["tmin"])
+					st.write(forecast[i]["tmax"])
+					st.write(forecast[i]["snow"])
+					st.image(forecast[i]["icon"])
+		else:
+			st.write("Connection refused.")
 
 	#Show webcams
 	with webcams_placeholder.container():
@@ -121,4 +135,4 @@ while True:
 			with col2:
 				st.image(webcams[i+1],use_column_width=True)
 	#Wait for update It should be 5 minutes as the webcams updates.
-	time.sleep(100)
+	time.sleep(300)
