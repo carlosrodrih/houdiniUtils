@@ -1,11 +1,11 @@
 # gltf files to USD converter in Houdini
 
-gltf_to_usd.py: this contains the code from the shelf tool to create the template.
-run_on_template: another code from the shelf, it runs the template with all the files inside a folder.
-run_on_template_2: this is to run from the Houdini Terminal using the bash script.
-batch_process: executable to run from the Houdini Terminal. You need to specify the folder and the houdini template hip file.
+- gltf_to_usd.py: this contains the code used inside the shelf tool to create the template for GLTF to USD conversion.
+- run_on_template: also to use it as a tool, it executes using the template on all files within a specified folder.
+- run_on_template_2: script designed to be run from the Houdini Terminal using a bash script.
+- batch_process: executable intended to be run from the Houdini Terminal. Requires specifying the folder containing GLTF files and the Houdini template hip file.
 
-The gltf files should be included inside a folder each to use it from the terminal.
+To use these scripts from the terminal, ensure that GLTF files are organized within folders accordingly.
 
 This is part of the Week 6 assignment. 
 
