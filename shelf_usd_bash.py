@@ -1,7 +1,7 @@
 import hou
 import os
 
-DIRPATH = "C:/Users/carlo/Desktop/python4production/WEEK6/assets/cgaxis_109_35_silver_maple_fbx"
+DIRPATH = "C:/Users/carlo/Desktop/python4production/WEEK6/assets/cgaxis_110_54_thatch_palm_fbx"
 
 def grab_sop_create(root):
         return [node for node in root.children() if node.type().name() == "sopcreate"][0]
